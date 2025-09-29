@@ -26,6 +26,10 @@
               <p>Now</p>
               <h2>--°C</h2>
               <p>----</p>
+              <div class="high-low-temp">
+                <p><i class="fa-light fa-arrow-up"></i> H: --°</p>
+                <p><i class="fa-light fa-arrow-down"></i> L: --°</p>
+              </div>
             </div>
             <div class="weather-icon">
               <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="" />
@@ -42,42 +46,37 @@
             <div class="forecast-item">
               <div class="icon-wrapper">
                 <img src="https://openweathermap.org/img/wn/02d.png" alt="" />
-                <span>&deg;C</span>
               </div>
               <p>---</p>
-              <p>---</p>
+              <p class="day-temp">--° / --°</p>
             </div>
             <div class="forecast-item">
               <div class="icon-wrapper">
                 <img src="https://openweathermap.org/img/wn/02d.png" alt="" />
-                <span>&deg;C</span>
               </div>
               <p>---</p>
-              <p>---</p>
+              <p class="day-temp">--° / --°</p>
             </div>
             <div class="forecast-item">
               <div class="icon-wrapper">
                 <img src="https://openweathermap.org/img/wn/02d.png" alt="" />
-                <span>&deg;C</span>
               </div>
               <p>---</p>
-              <p>---</p>
+              <p class="day-temp">--° / --°</p>
             </div>
             <div class="forecast-item">
               <div class="icon-wrapper">
                 <img src="https://openweathermap.org/img/wn/02d.png" alt="" />
-                <span>&deg;C</span>
               </div>
               <p>---</p>
-              <p>---</p>
+              <p class="day-temp">--° / --°</p>
             </div>
             <div class="forecast-item">
               <div class="icon-wrapper">
                 <img src="https://openweathermap.org/img/wn/02d.png" alt="" />
-                <span>&deg;C</span>
               </div>
               <p>---</p>
-              <p>---</p>
+              <p class="day-temp">--° / --°</p>
             </div>
           </div>
         </div>
@@ -86,7 +85,7 @@
           <div class="card highlights">
             <h2>Today's Highlights</h2>
             <div class="highlights-container">
-              <div class="highlights-item">
+              <div class="highlights-item air-quality-card">
                 <div class="header-item">
                   <p>Air Quality Index</p>
                   <p class="bad">Very Poor</p>
@@ -129,7 +128,7 @@
                   </div>
                 </div>
               </div>
-              <div class="highlights-item">
+              <div class="highlights-item sunrise-sunset-card">
                 <div class="header-item">
                   <p>Sunrise & Sunset</p>
                 </div>
@@ -183,7 +182,6 @@
               </div>
             </div>
           </div>
-
           <div class="card hourly-forecast">
             <h2>Today at</h2>
             <div class="hourly-forecast-container">
