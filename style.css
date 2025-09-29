@@ -15,6 +15,7 @@ body {
   background-color: var(--bg-color1);
   color: #fff;
   padding: 0 15px;
+  overflow-x: hidden; /* KUNCI PERBAIKAN #1: Mencegah scroll horizontal di seluruh halaman */
 }
 
 /* === Mobile First Styles (Default) === */
@@ -26,25 +27,25 @@ body {
   padding: 15px 0;
   margin-bottom: 10px;
   display: flex;
-  flex-direction: column; /* Header ditumpuk vertikal di mobile */
+  flex-direction: column;
   gap: 15px;
 }
 
 .header .weather-input {
   width: 100%;
   display: flex;
-  flex-direction: column; /* Input dan tombol ditumpuk vertikal */
+  flex-direction: column;
   gap: 10px;
 }
 
 .header #city_input {
   background-color: var(--bg-color2);
   border: none;
-  padding: 12px;
+  padding: 12px 20px;
   font-size: 16px;
   border-radius: 25px;
   color: #fff;
-  min-height: 44px; /* Target sentuh minimum */
+  min-height: 44px;
 }
 
 .header #city_input:focus {
@@ -58,7 +59,7 @@ body {
   padding: 12px;
   border-radius: 25px;
   cursor: pointer;
-  min-height: 44px; /* Target sentuh minimum */
+  min-height: 44px;
 }
 
 .header #searchBtn {
@@ -71,13 +72,13 @@ body {
 
 .weather-data {
   display: grid;
-  grid-template-columns: 1fr; /* Default: 1 kolom untuk mobile */
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
 .weather-left,
 .weather-right {
-  grid-column: span 1; /* Semua bagian mengambil 1 kolom */
+  grid-column: span 1;
 }
 
 .card {
@@ -118,8 +119,10 @@ body {
 
 .forecast-item {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  place-items: center;
+  /* KUNCI PERBAIKAN #2: Membuat layout prakiraan lebih fleksibel */
+  grid-template-columns: 50px 1fr 1fr; /* Ikon mendapat ruang tetap, sisanya fleksibel */
+  align-items: center;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
@@ -128,9 +131,13 @@ body {
   align-items: center;
 }
 
+.icon-wrapper img {
+  width: 40px;
+  height: auto;
+}
+
 .highlights-container {
   display: grid;
-  /* Teknik auto-fit: otomatis menyesuaikan jumlah kolom berdasarkan ruang */
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
 }
@@ -161,8 +168,7 @@ body {
 
 .air-quality-details {
   display: grid;
-  /* Grid fleksibel untuk detail kualitas udara */
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); /* Dibuat lebih fleksibel */
   gap: 10px;
   margin-top: 10px;
 }
@@ -212,7 +218,7 @@ body {
 
 .hourly-forecast-container {
   display: flex;
-  overflow-x: auto;
+  overflow-x: auto; /* Scroll horizontal di sini memang disengaja */
   gap: 10px;
   padding-bottom: 10px;
 }
@@ -233,40 +239,39 @@ body {
 /* === Tablet Styles === */
 @media (min-width: 768px) {
   .header {
-    flex-direction: row; /* Header kembali horizontal */
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
   .header .weather-input {
-    flex-direction: row; /* Input dan tombol kembali horizontal */
+    flex-direction: row;
     width: auto;
   }
 
   .weather-data {
-    grid-template-columns: 2fr 3fr; /* Layout 2 kolom untuk tablet */
+    grid-template-columns: 2fr 3fr;
   }
 }
 
 /* === Desktop Styles === */
 @media (min-width: 1100px) {
   .weather-data {
-    grid-template-columns: 1fr 3fr; /* Layout asli untuk desktop */
+    grid-template-columns: 1fr 3fr;
   }
 
   .highlights-container {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Mengoptimalkan ruang di desktop */
   .highlights-item:nth-child(1) {
     /* Air Quality Index */
-    grid-column: span 2; /* Mengambil 2 kolom */
+    grid-column: span 2;
   }
 
   .highlights-item:nth-child(2) {
     /* Sunrise & Sunset */
-    grid-column: span 1; /* Mengambil 1 kolom */
+    grid-column: span 1;
   }
 
   .air-quality-details {
