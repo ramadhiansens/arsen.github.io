@@ -7,45 +7,56 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
 }
 
 body {
   min-height: 100vh;
   background-color: var(--bg-color1);
   color: #fff;
+  font-family: sans-serif;
   padding: 0 15px;
-  overflow-x: hidden; /* KUNCI PERBAIKAN #1: Mencegah scroll horizontal di seluruh halaman */
 }
 
-/* === Mobile First Styles (Default) === */
+/* Mengatur lebar maksimum container untuk layar sangat besar (1920px) */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- Gaya Default untuk Mobile (lebar < 768px) --- */
 
 .header {
   position: sticky;
   top: 0;
   background-color: var(--bg-color1);
-  padding: 15px 0;
-  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-wrap: wrap; /* Izinkan item untuk turun ke baris baru */
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px; /* Jarak antar item header */
+  margin-bottom: 10px;
+  padding: 15px 0;
+}
+
+.header h2 {
+  width: 100%; /* Judul mengambil lebar penuh di mobile */
 }
 
 .header .weather-input {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .header #city_input {
   background-color: var(--bg-color2);
   border: none;
-  padding: 12px 20px;
+  padding: 14px; /* Disesuaikan untuk target sentuh 44px */
   font-size: 16px;
   border-radius: 25px;
   color: #fff;
-  min-height: 44px;
+  flex-grow: 1; /* Input mengambil sisa ruang */
 }
 
 .header #city_input:focus {
@@ -56,10 +67,9 @@ body {
 .header #locationBtn {
   border: none;
   font-size: 16px;
-  padding: 12px;
+  padding: 14px; /* Disesuaikan untuk target sentuh 44px */
   border-radius: 25px;
   cursor: pointer;
-  min-height: 44px;
 }
 
 .header #searchBtn {
@@ -70,15 +80,16 @@ body {
   background-color: #ea6e4b;
 }
 
+/* Tata letak utama menjadi 1 kolom di mobile */
 .weather-data {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Hanya 1 kolom */
   gap: 12px;
 }
 
 .weather-left,
 .weather-right {
-  grid-column: span 1;
+  grid-column: span 1; /* Setiap bagian mengambil 1 kolom penuh */
 }
 
 .card {
@@ -119,10 +130,8 @@ body {
 
 .forecast-item {
   display: grid;
-  /* KUNCI PERBAIKAN #2: Membuat layout prakiraan lebih fleksibel */
-  grid-template-columns: 50px 1fr 1fr; /* Ikon mendapat ruang tetap, sisanya fleksibel */
-  align-items: center;
-  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
   margin-bottom: 15px;
 }
 
@@ -131,15 +140,17 @@ body {
   align-items: center;
 }
 
-.icon-wrapper img {
-  width: 40px;
-  height: auto;
-}
-
+/* Highlights di mobile menjadi 2 kolom agar tidak terlalu sempit */
 .highlights-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+}
+
+/* Kartu khusus di highlights akan mengambil lebar penuh di mobile */
+.highlights-item.air-quality-card,
+.highlights-item.sunrise-sunset-card {
+  grid-column: span 2;
 }
 
 .highlights-item {
@@ -168,7 +179,7 @@ body {
 
 .air-quality-details {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); /* Dibuat lebih fleksibel */
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Grid yang lebih fleksibel */
   gap: 10px;
   margin-top: 10px;
 }
@@ -177,7 +188,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
 }
 
 .air-quality-data i {
@@ -218,7 +228,7 @@ body {
 
 .hourly-forecast-container {
   display: flex;
-  overflow-x: auto; /* Scroll horizontal di sini memang disengaja */
+  overflow-x: auto;
   gap: 10px;
   padding-bottom: 10px;
 }
@@ -236,45 +246,67 @@ body {
   height: 50px;
 }
 
-/* === Tablet Styles === */
+.high-low-temp {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.high-low-temp p {
+  color: #fff;
+  font-size: 14px;
+}
+
+.high-low-temp i {
+  margin-right: 5px;
+}
+
+.forecast-item .icon-wrapper span {
+  display: none;
+}
+
+.forecast-item .day-temp {
+  color: #fff;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* --- Media Query untuk Tablet dan Desktop (lebar >= 768px) --- */
 @media (min-width: 768px) {
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  .header h2 {
+    width: auto; /* Kembalikan lebar judul ke otomatis */
   }
 
   .header .weather-input {
-    flex-direction: row;
     width: auto;
   }
 
-  .weather-data {
-    grid-template-columns: 2fr 3fr;
+  .header #locationBtn {
+    flex-grow: 0; /* Kembalikan lebar tombol ke otomatis */
   }
-}
 
-/* === Desktop Styles === */
-@media (min-width: 1100px) {
+  /* Kembalikan tata letak utama menjadi multi-kolom */
   .weather-data {
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .weather-left {
+    grid-column: span 1;
+  }
+
+  .weather-right {
+    grid-column: span 3;
   }
 
   .highlights-container {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .highlights-item:nth-child(1) {
-    /* Air Quality Index */
+  .highlights-item.air-quality-card {
+    grid-column: span 3;
+  }
+
+  .highlights-item.sunrise-sunset-card {
     grid-column: span 2;
-  }
-
-  .highlights-item:nth-child(2) {
-    /* Sunrise & Sunset */
-    grid-column: span 1;
-  }
-
-  .air-quality-details {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
